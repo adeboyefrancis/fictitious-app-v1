@@ -23,8 +23,6 @@ variable "region" {
 
 variable "custom_ami_version" {
   type = string
-  default = "v1.0.0"
-
 }
 
 variable "instance_type" {
