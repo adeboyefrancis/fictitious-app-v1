@@ -34,7 +34,7 @@ resource "aws_dms_replication_instance" "dms_rep_instance" {
   allocated_storage            = 10
   apply_immediately            = true
   multi_az                     = false
-  replication_instance_class   = "dms.t2.micro"
+  replication_instance_class   = "dms.t3.micro"
   replication_instance_id      = "startup-mvp-app"
   replication_subnet_group_id  = aws_dms_replication_subnet_group.dms_subnet_group.id
 
