@@ -38,3 +38,8 @@ variable "db_password" {
   type        = string
   sensitive   = true
 }
+
+variable "s3_name" {
+  type = string
+  default = "rds-s3-image"
+}
