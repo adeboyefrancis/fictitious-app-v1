@@ -20,3 +20,10 @@ output "private_subnets" {
   value       = data.tfe_outputs.infra-connection.values.private_subnets
   sensitive = true
 }
+
+
+output "rds_hostname" {
+  description = "RDS instance hostname"
+  value       = aws_db_instance.rds_app_db.address
+  sensitive   = true
+}

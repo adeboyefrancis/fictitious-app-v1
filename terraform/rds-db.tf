@@ -48,7 +48,7 @@ resource "aws_security_group" "rds_sg" {
   vpc_id      = data.tfe_outputs.infra-connection.values.main_vpc
 
   ingress {
-    security_groups = [aws_security_group.webserver-sg.id] # To be added for DMS , aws_security_group.dms_sg.id
+    security_groups = [aws_security_group.webserver-sg.id, aws_security_group.dms_sg.id]
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
