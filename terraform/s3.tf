@@ -47,6 +47,7 @@ EOF
 
 resource "aws_cloudfront_distribution" "cf_s3_distribution" {
     depends_on = [ aws_s3_bucket.s3-image-bucket ]
+    retain_on_delete = true
   origin {
     domain_name              = aws_s3_bucket.s3-image-bucket.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.oac-rds-s3.id
@@ -54,6 +55,7 @@ resource "aws_cloudfront_distribution" "cf_s3_distribution" {
   }
 
   enabled             = true
+  is_ipv6_enabled     = true
 
 
   
@@ -72,7 +74,7 @@ resource "aws_cloudfront_distribution" "cf_s3_distribution" {
       }
     }
 
-    viewer_protocol_policy = "redirect-to-https"
+    viewer_protocol_policy = "allow-all"
     min_ttl                = 0
     default_ttl            = 3600
     max_ttl                = 86400
