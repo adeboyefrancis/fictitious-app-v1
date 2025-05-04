@@ -106,12 +106,3 @@ resource "aws_cloudfront_origin_access_control" "oac-rds-s3" {
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
 }
-
-# CloudFront Invalidation
-resource "aws_cloudfront_invalidation" "invalidate_after_upload" {
-  distribution_id = aws_cloudfront_distribution.cf_s3_distribution.id
-  path            = ["/*"]  # Invalidate all paths
-    opts = {
-    wait_for_invalidation = true
-  }
-}
