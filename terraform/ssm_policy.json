@@ -1,9 +1,9 @@
 {
-  "Version": "2012-10-17",
-  "Statement": [
+  "Version" : "2012-10-17",
+  "Statement" : [
     {
-      "Effect": "Allow",
-      "Action": [
+      "Effect" : "Allow",
+      "Action" : [
         "ssm:DescribeAssociation",
         "ssm:GetDeployablePatchSnapshotForInstance",
         "ssm:GetDocument",
@@ -20,21 +20,21 @@
         "ssm:UpdateInstanceAssociationStatus",
         "ssm:UpdateInstanceInformation"
       ],
-      "Resource": "*"
+      "Resource" : "*"
     },
     {
-      "Effect": "Allow",
-      "Action": [
+      "Effect" : "Allow",
+      "Action" : [
         "ssmmessages:CreateControlChannel",
         "ssmmessages:CreateDataChannel",
         "ssmmessages:OpenControlChannel",
         "ssmmessages:OpenDataChannel"
       ],
-      "Resource": "*"
+      "Resource" : "*"
     },
     {
-      "Effect": "Allow",
-      "Action": [
+      "Effect" : "Allow",
+      "Action" : [
         "ec2messages:AcknowledgeMessage",
         "ec2messages:DeleteMessage",
         "ec2messages:FailMessage",
@@ -42,30 +42,29 @@
         "ec2messages:GetMessages",
         "ec2messages:SendReply"
       ],
-      "Resource": "*"
+      "Resource" : "*"
     },
+  
     {
-      "Effect": "Allow",
-      "Action": [
+      "Effect" : "Allow",
+      "Action" : [
         "s3:PutObject",
         "s3:GetObject",
         "s3:ListBucket",
         "s3:DeleteObject"
       ],
-      "Resource": "*"
+      "Resource" : "*"
     },
+
     {
-      "Effect": "Allow",
-      "Action": [
+      "Effect" : "Allow",
+      "Action" : [
         "ssm:GetParameters",
         "ssm:DescribeParameters"
       ],
-      "Resource": "*"
-    },
-    {
-      "Effect": "Allow",
-      "Action": "cloudfront:CreateInvalidation",
-      "Resource": "arn:aws:cloudfront::${account_id}:distribution/${distribution_id}"
+      "Resource" : "*"
+
+
     }
   ]
 }

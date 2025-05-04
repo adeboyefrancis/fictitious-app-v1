@@ -30,11 +30,7 @@ resource "aws_iam_role" "ec2_role_ssm" {
 resource "aws_iam_policy" "ssm_policy" {
   name        = "ec2_ssm_policy"
   description = "Session Manager for Instance Connection"
-  policy      = templatefile("ssm_policy.json.tpl", {
-    account_id = data.aws_caller_identity.current.account_id,
-    distribution_id = aws_cloudfront_distribution.cf_s3_distribution.id
-  })
-  
+  policy      = "${file("ssm_policy.json")}"
 }
 
 ###################
