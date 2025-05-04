@@ -59,7 +59,7 @@
         "ssm:GetParameters",
         "ssm:DescribeParameters"
       ],
-      "Resource": "arn:aws:ssm:*:*:parameter/cloudtalents/startup/*"
+      "Resource": "arn:aws:ssm:eu-west-1:${data.aws_caller_identity.current.account_id}:parameter/cloudtalents/startup/*"
     }
   ]
 }
