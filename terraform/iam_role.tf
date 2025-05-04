@@ -30,7 +30,7 @@ resource "aws_iam_role" "ec2_role_ssm" {
 resource "aws_iam_policy" "ssm_policy" {
   name        = "ec2_ssm_policy"
   description = "Session Manager for Instance Connection"
-  policy      = "${file("ssm_policy.json")}"
+  policy      = templatefile("terraform/ssm_policy.json.tpl")
 }
 
 ###################
