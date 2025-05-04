@@ -65,7 +65,7 @@
     {
       "Effect": "Allow",
       "Action": "cloudfront:CreateInvalidation",
-      "Resource": "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:distribution/${aws_cloudfront_distribution.cf_s3_distribution.id}"
+      "Resource": "arn:aws:cloudfront::${account_id}:distribution/${distribution_id}"
     }
   ]
 }
