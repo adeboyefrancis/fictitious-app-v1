@@ -35,3 +35,22 @@ resource "aws_ssm_parameter" "cfd_image_domain" {
   type        = "String"
   value       = aws_cloudfront_distribution.cf_s3_distribution.domain_name
 }
+
+# IAM policy for Webserver to read parameter store
+resource "aws_iam_policy" "ec2_ssm_parameter_policy" {
+  name        = "ec2_ssm_parameter_policy"
+  description = "Allow webserver to read parameter store"
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "ssm:DescribeParameters",
+          "ssm:GetParameters"
+        ],
+        "Resource" : "arn:aws:ssm:eu-west-1:${data.aws_caller_identity.current.account_id}:parameter/cloudtalents/startup/*"
+      }
+    ]
+  })
+}
