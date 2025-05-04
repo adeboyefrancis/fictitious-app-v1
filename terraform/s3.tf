@@ -29,7 +29,7 @@ resource "aws_s3_bucket_policy" "s3_cf_bucket_policy" {
                 "Service": "cloudfront.amazonaws.com"
             },
             "Action": "s3:GetObject",
-            "Resource": "${aws_s3_bucket.s3-image-bucket.arn}/*",
+            "Resource": "${aws_s3_bucket.s3-image-bucket.id}/*",
             "Condition": {
                 "StringEquals": {
                     "AWS:SourceArn": "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:distribution/${aws_cloudfront_distribution.cf_s3_distribution.id}"
