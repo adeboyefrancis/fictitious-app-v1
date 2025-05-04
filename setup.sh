@@ -7,21 +7,19 @@ APP_DIR="/opt/app"
 #
 # Relevant link: https://www.geeksforgeeks.org/chown-command-in-linux-with-examples/
 #################################################################################################
-sudo chown -R ubuntu: $APP_DIR
+sudo chown -R ubuntu $APP_DIR
 
 #################################################################################################
 # Update Ubuntu's package list and install the following dependencies:
 # - python3-pip
 # - python3-venv
-# - postgresql 
-# - postgresql-contrib 
 # - nginx 
 # 
 # Relevant link: https://ubuntu.com/server/docs/package-management
 #################################################################################################
-sudo apt update -y
-sudo apt install -y python3-pip python3-venv nginx
-
+sudo apt update && sudo apt install -y nginx \
+python3-pip \
+python3-venv
 
 #################################################################################################
 # Create a Python virtual environment in the current directory and activate it
@@ -36,8 +34,7 @@ source ~/app/bin/activate
 #
 # Relevant link: https://realpython.com/what-is-pip/
 #################################################################################################
-pip install -r $APP_DIR/requirements.txt
-
+python3 -m pip install -r $APP_DIR/requirements.txt
 
 # Set up Gunicorn to serve the Django application
 cat > /tmp/gunicorn.service <<EOF
@@ -50,7 +47,7 @@ Environment="AWS_DEFAULT_REGION=eu-west-1"
 User=$USER
 Group=www-data
 WorkingDirectory=$APP_DIR
-ExecStart=$APP_DIR/venv/bin/gunicorn \
+ExecStart=$PWD/app/bin/gunicorn \
           --workers 3 \
           --bind unix:/tmp/gunicorn.sock \
           cloudtalents.wsgi:application
@@ -65,7 +62,7 @@ sudo mv /tmp/gunicorn.service /etc/systemd/system/gunicorn.service
 #
 # Relevant link: https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units
 #################################################################################################
-sudo systemctl enable gunicorn --now
+sudo systemctl enable gunicorn.service --now
 
 # Configure Nginx to proxy requests to Gunicorn
 sudo rm /etc/nginx/sites-enabled/default
@@ -108,8 +105,9 @@ sudo systemctl restart nginx
 #
 # Relevant link: https://codingforentrepreneurs.com/blog/hello-linux-nginx-and-ufw-firewall
 #################################################################################################
-sudo ufw allow http
 sudo ufw enable
+sudo ufw allow http
+
 
 # Print completion message
 echo "Django application setup complete!"
