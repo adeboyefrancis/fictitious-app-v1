@@ -53,6 +53,18 @@ jobs:
           audience: sts.amazonaws.com
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ secrets.PACKER_AMI_DEPLOY }}
+
+
+      # Cat the DB secrets to the secrets.sh in GitHub Workspace and add Execution to file
+      - name: Create DB secrets file
+        run: |
+          cat > $GITHUB_WORKSPACE/secrets.sh << 'EOF'
+          #!/bin/bash
+          export SECRET_KEY='${{ secrets.SECRET_KEY }}'
+          export DB_USER='${{ secrets.DB_USER }}'
+          export DB_PASSWORD='${{ secrets.DB_PASSWORD }}'
+          EOF
+          chmod +x $GITHUB_WORKSPACE/secrets.sh
         
 
       # Build AMI Image for Ubuntu using Packer
@@ -63,4 +75,7 @@ jobs:
           -var "vpc_id=${{ secrets.DEVELOPMENT_VPC_ID }}" \
           -var "subnet_id=${{ secrets.DEVELOPMENT_SUBNET_ID }}" \
           -var "version=${{ github.event.release.tag_name }}" \
+          -var "secret_key=${{ secrets.SECRET_KEY }}" \
+          -var "db_user=${{ secrets.DB_USER }}" \
+          -var "db_password=${{ secrets.DB_PASSWORD }}" \
           ./image.pkr.hcl
