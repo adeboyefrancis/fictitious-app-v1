@@ -1,4 +1,4 @@
-# Parameter Store for Database Values
+/* # Parameter Store for Database Values
 
 resource "aws_ssm_parameter" "db_secret_key" {
   name        = "/cloudtalents/startup/db_secret_key"
@@ -53,4 +53,4 @@ resource "aws_iam_policy" "ec2_ssm_parameter_policy" {
       }
     ]
   })
-}
+} */

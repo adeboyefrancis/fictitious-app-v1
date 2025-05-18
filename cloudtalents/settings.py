@@ -12,11 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
-import boto3
-
-ssm = boto3.client("ssm")
-SSM_PARAMETER_NAMESPACE = "/cloudtalents/startup"
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,8 +19,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ssm.get_parameter(Name=f"{SSM_PARAMETER_NAMESPACE}/secret_key", WithDecryption=True)["Parameter"]["Value"]
+# SECURITY WARNING: this value should be kept secret! Don't push it to GitHub
+SECRET_KEY = "REPLACE_SECRET_KEY"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -84,10 +79,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'mvp',
         # SECURITY WARNING: this value should be kept secret! Don't push it to GitHub
-        'USER': ssm.get_parameter(Name=f"{SSM_PARAMETER_NAMESPACE}/db_user", WithDecryption=True)["Parameter"]["Value"],
+        'USER': 'REPLACE_DATABASE_USER',
         # SECURITY WARNING: this value should be kept secret! Don't push it to GitHub
-        'PASSWORD': ssm.get_parameter(Name=f"{SSM_PARAMETER_NAMESPACE}/db_password", WithDecryption=True)["Parameter"]["Value"],
-        'HOST': ssm.get_parameter(Name=f"{SSM_PARAMETER_NAMESPACE}/database_endpoint", WithDecryption=True)["Parameter"]["Value"],
+        'PASSWORD': 'REPLACE_DATABASE_PASSWORD',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -134,12 +129,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_S3_BUCKET_NAME = ssm.get_parameter(Name=f"{SSM_PARAMETER_NAMESPACE}/image_storage_bucket_name", WithDecryption=True)["Parameter"]["Value"]
-MEDIA_HOST = ssm.get_parameter(Name=f"{SSM_PARAMETER_NAMESPACE}/image_storage_cloudfront_domain", WithDecryption=True)["Parameter"]["Value"]
-MEDIA_URL=f'https://{MEDIA_HOST}/'
-MEDIA_ROOT = '/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 LOGIN_REDIRECT_URL = '/images/'
-
-
-STORAGES = {"default": {"BACKEND": "startup.storages.PublicMediaStorage"}}
