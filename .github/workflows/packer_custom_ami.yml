@@ -75,7 +75,4 @@ jobs:
           -var "vpc_id=${{ secrets.DEVELOPMENT_VPC_ID }}" \
           -var "subnet_id=${{ secrets.DEVELOPMENT_SUBNET_ID }}" \
           -var "version=${{ github.event.release.tag_name }}" \
-          -var "secret_key=${{ secrets.SECRET_KEY }}" \
-          -var "db_user=${{ secrets.DB_USER }}" \
-          -var "db_password=${{ secrets.DB_PASSWORD }}" \
           ./image.pkr.hcl
