@@ -39,12 +39,12 @@ variable "db_password" {
   sensitive   = true
 }
 
-/* variable "s3_name" {
+variable "s3_name" {
   type = string
   default = "rds-s3-image"
 }
 
 
-variable "secret_key" {
+/* variable "secret_key" {
   type = string
 } */

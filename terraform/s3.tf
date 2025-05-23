@@ -1,4 +1,4 @@
-/* #############################################
+#############################################
 # Get current AWS account ID
 data "aws_caller_identity" "current" {}
 #############################################
@@ -108,4 +108,3 @@ resource "aws_cloudfront_origin_access_control" "oac-rds-s3" {
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
 }
- */
