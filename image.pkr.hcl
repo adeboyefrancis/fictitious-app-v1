@@ -71,16 +71,20 @@ build {
     "source.amazon-ebs.ubuntu"
   ]
 
-  provisioner "file" {
+provisioner "file" {
     source      = "./"
     destination = "/tmp"
   }
-
   provisioner "shell" {
     inline = [
+      "echo Moving files...",
       "sudo mkdir -p /opt/app",
-      "sudo mv /tmp/* /opt/app/"
+      "sudo mv /tmp/* /opt/app",
+      "sudo chmod +x /opt/app/setup.sh"
     ]
+  }
+  provisioner "shell" {
+    script = "setup.sh"
   }
 
   post-processor "amazon-ami-management" {
