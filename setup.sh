@@ -13,17 +13,13 @@ sudo chown -R ubuntu $APP_DIR
 # Update Ubuntu's package list and install the following dependencies:
 # - python3-pip
 # - python3-venv
-# - postgresql 
-# - postgresql-contrib 
 # - nginx 
 # 
 # Relevant link: https://ubuntu.com/server/docs/package-management
 #################################################################################################
-sudo apt update -y && sudo apt install -y \
-  nginx \
-  python3-pip \
-  python3.10-venv
-
+sudo apt update && sudo apt install -y nginx \
+python3-pip \
+python3-venv
 
 #################################################################################################
 # Create a Python virtual environment in the current directory and activate it
@@ -115,4 +111,3 @@ sudo ufw allow http
 
 # Print completion message
 echo "Django application setup complete!"
-

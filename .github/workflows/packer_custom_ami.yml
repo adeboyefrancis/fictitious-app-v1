@@ -9,7 +9,7 @@ env:
   PACKER_AMI_DEPLOY: ${{ secrets.PACKER_AMI_DEPLOY }}
   DEVELOPMENT_VPC_ID: ${{ secrets.DEVELOPMENT_VPC_ID }}
   DEVELOPMENT_SUBNET_ID: ${{ secrets.DEVELOPMENT_SUBNET_ID }}
-  PACKER_VERSION: "latest"
+  PACKER_VERSION: "1.11.2"
 
 permissions:
   id-token: write
