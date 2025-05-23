@@ -45,6 +45,7 @@ variable "s3_name" {
 }
 
 
-/* variable "secret_key" {
+variable "secret_key" {
   type = string
-} */
+  sensitive = true
+}
