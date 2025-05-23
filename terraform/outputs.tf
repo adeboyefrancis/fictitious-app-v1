@@ -22,8 +22,8 @@ output "private_subnets" {
 }
 
 
-output "rds_hostname" {
+/* output "rds_hostname" {
   description = "RDS instance hostname"
   value       = aws_db_instance.rds_app_db.address
   sensitive   = true
-}
+} */

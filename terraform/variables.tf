@@ -29,7 +29,7 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-variable "db_username" {
+/* variable "db_username" {
   type = string
   sensitive = true
   
@@ -47,4 +47,4 @@ variable "s3_name" {
 
 variable "secret_key" {
   type = string
-}
+} */
