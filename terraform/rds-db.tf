@@ -1,4 +1,4 @@
-/* # DB Subnet Group
+# DB Subnet Group
 resource "aws_db_subnet_group" "rds_subnet_group" {
   name       = "start-up-db"
   subnet_ids = data.tfe_outputs.infra-connection.values.private_subnets
@@ -58,4 +58,3 @@ resource "aws_security_group" "rds_sg" {
     Name = "${var.prefix}-rds-app-sg"
   }
 }
- */

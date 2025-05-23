@@ -19,8 +19,12 @@ sudo chown -R ubuntu $APP_DIR
 # 
 # Relevant link: https://ubuntu.com/server/docs/package-management
 #################################################################################################
-sudo apt update -y
-sudo apt install -y python3-pip python3-venv postgresql postgresql-contrib nginx
+sudo apt update -y && sudo apt install -y \
+  nginx \
+  python3-pip \
+  python3.10-venv \
+  postgresql \
+  postgresql-contrib
 
 #################################################################################################
 # Start and enable the PostgreSQL service
@@ -72,7 +76,7 @@ source $APP_DIR/venv/bin/activate
 #
 # Relevant link: https://realpython.com/what-is-pip/
 #################################################################################################
-pip install -r $APP_DIR/requirements.txt
+python3 -m pip install -r $APP_DIR/requirements.txt
 
 # Apply Django migrations
 python3 $APP_DIR/manage.py makemigrations
@@ -103,7 +107,7 @@ sudo mv /tmp/gunicorn.service /etc/systemd/system/gunicorn.service
 #
 # Relevant link: https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units
 #################################################################################################
-sudo systemctl enable gunicorn --now
+sudo systemctl enable gunicorn.service --now
 
 # Configure Nginx to proxy requests to Gunicorn
 sudo rm /etc/nginx/sites-enabled/default

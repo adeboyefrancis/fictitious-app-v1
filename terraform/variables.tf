@@ -29,7 +29,7 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-/* variable "db_username" {
+variable "db_username" {
   type = string
   sensitive = true
   
@@ -39,7 +39,7 @@ variable "db_password" {
   sensitive   = true
 }
 
-variable "s3_name" {
+/* variable "s3_name" {
   type = string
   default = "rds-s3-image"
 }

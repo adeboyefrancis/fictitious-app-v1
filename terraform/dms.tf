@@ -1,4 +1,4 @@
-/* # Data Migration Service Policy
+# Data Migration Service Policy
 
 data "aws_iam_policy_document" "dms_assume_role" {
   statement {
@@ -133,4 +133,3 @@ resource "aws_dms_replication_task" "dms_task" {
   }
   target_endpoint_arn = aws_dms_endpoint.rds_endpoint.endpoint_arn
 }
- */
