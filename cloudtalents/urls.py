@@ -22,4 +22,3 @@ urlpatterns = [
     path('', include('startup.urls')),
     path('accounts/', include('django.contrib.auth.urls')),  # Add authentication URLs
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

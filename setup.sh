@@ -7,7 +7,7 @@ APP_DIR="/opt/app"
 #
 # Relevant link: https://www.geeksforgeeks.org/chown-command-in-linux-with-examples/
 #################################################################################################
-sudo chown -R ubuntu: $APP_DIR
+TODO
 
 #################################################################################################
 # Update Ubuntu's package list and install the following dependencies:
@@ -19,22 +19,21 @@ sudo chown -R ubuntu: $APP_DIR
 # 
 # Relevant link: https://ubuntu.com/server/docs/package-management
 #################################################################################################
-sudo apt update -y
-sudo apt install -y python3-pip python3-venv postgresql postgresql-contrib nginx
+TODO
 
 #################################################################################################
 # Start and enable the PostgreSQL service
 #
 # Relevant link: https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units
 #################################################################################################
-sudo systemctl enable postgresql --now
+TODO
 
 #################################################################################################
 # Load the secret values from secrets.sh
 #
 # Relevant link: https://www.tutorialspoint.com/linux-source-command
 #################################################################################################
-source $APP_DIR/secrets.sh
+TODO
 
 #################################################################################################
 # Configure PostgreSQL database based on details from secrets.sh
@@ -48,31 +47,27 @@ ALTER ROLE $DB_USER SET timezone TO 'UTC';
 GRANT ALL PRIVILEGES ON DATABASE mvp TO $DB_USER;
 EOF
 
-####################################################################################################
+#################################################################################################
 # Replace "REPLACE_SECRET_KEY", "REPLACE_DATABASE_USER" and "REPLACE_DATABASE_PASSWORD" in
 # cloudtalents/settings.py using the details from secrets.sh
-# If values contains special characters, use | or \ while replacing value, in this case , $SECRET_KEY
 #
 # Relevant link: https://www.geeksforgeeks.org/sed-command-in-linux-unix-with-examples/
-#####################################################################################################
-sudo sed -i "s|REPLACE_SECRET_KEY|$SECRET_KEY|g" $APP_DIR/cloudtalents/settings.py
-sudo sed -i "s/REPLACE_DATABASE_USER/$DB_USER/g" $APP_DIR/cloudtalents/settings.py
-sudo sed -i "s/REPLACE_DATABASE_PASSWORD/$DB_PASSWORD/g" $APP_DIR/cloudtalents/settings.py
+#################################################################################################
+TODO
 
 #################################################################################################
 # Create a Python virtual environment in the current directory and activate it
 #
 # Relevant link: https://www.liquidweb.com/blog/how-to-setup-a-python-virtual-environment-on-ubuntu-18-04/
 #################################################################################################
-python3 -m venv $APP_DIR/venv
-source $APP_DIR/venv/bin/activate
+TODO
 
 #################################################################################################
 # Install the Python dependencies listed in requirements.txt
 #
 # Relevant link: https://realpython.com/what-is-pip/
 #################################################################################################
-pip install -r $APP_DIR/requirements.txt
+TODO
 
 # Apply Django migrations
 python3 $APP_DIR/manage.py makemigrations
@@ -88,7 +83,7 @@ After=network.target
 User=$USER
 Group=www-data
 WorkingDirectory=$APP_DIR
-ExecStart=$APP_DIR/venv/bin/gunicorn \
+ExecStart=$PWD/venv/bin/gunicorn \
           --workers 3 \
           --bind unix:/tmp/gunicorn.sock \
           cloudtalents.wsgi:application
@@ -103,7 +98,7 @@ sudo mv /tmp/gunicorn.service /etc/systemd/system/gunicorn.service
 #
 # Relevant link: https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units
 #################################################################################################
-sudo systemctl enable gunicorn --now
+TODO
 
 # Configure Nginx to proxy requests to Gunicorn
 sudo rm /etc/nginx/sites-enabled/default
@@ -138,16 +133,14 @@ sudo nginx -t
 #
 # Relevant link: https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units
 #################################################################################################
-sudo systemctl daemon-reload
-sudo systemctl restart nginx
+TODO
 
 #################################################################################################
 # Allow traffic to port 80 using ufw
 #
 # Relevant link: https://codingforentrepreneurs.com/blog/hello-linux-nginx-and-ufw-firewall
 #################################################################################################
-sudo ufw allow http
-sudo ufw enable
+TODO
 
 # Print completion message
 echo "Django application setup complete!"
